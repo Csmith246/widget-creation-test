@@ -11,23 +11,16 @@ export default class App extends Widget {
     super(args);
   }
 
-  postInitialize() {
-    setTimeout(()=>{
-      console.log("THIS.INIT FIRED");
-      this.init();
-    }, 5000)
-  }
-
   render() {
     return (
-      <div id="instant-app-landing"></div>
+      <div id="instant-app-landing" afterCreate={this.init.bind(this)}></div>
     );
   }
 
-  private async init() {
+  private init(dom:any) {
     
     new InstantAppLanding({
-      container: "instant-app-landing"
+      container: dom
     })
   }
 
